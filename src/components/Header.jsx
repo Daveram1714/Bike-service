@@ -1,4 +1,4 @@
-import { heroData,bike } from "../data.js";
+import { bike } from "../data.js";
 import { useState } from "react";
 import Container from "./Container.jsx";
 import Navbar from "../components/Navbar.jsx";
@@ -14,7 +14,7 @@ function Header()
   
     const scrollRight = () => {
       setStartIndex((prevIndex) =>
-        Math.min(prevIndex + itemsPerPage, heroData.length - itemsPerPage)
+        Math.min(prevIndex + itemsPerPage, bike.length - itemsPerPage)
       );
     };
   

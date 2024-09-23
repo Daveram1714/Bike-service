@@ -7,12 +7,17 @@ function Container() {
   const [showPopup, setShowPopup] = useState(false);
   const { selectedUser, setSelectedUser, userList, setUserList } = useContext(Namecontext);
   const [isEditing, setIsEditing] = useState(false);
+  const [date, setDate] = useState('');
 
   const handleClick = (item) => {
     setSelectedUser(item);
     setShowPopup(true);
     setIsEditing(true);
   };
+
+  const handleDateChange = (e) => {
+    setDate(e.target.value); 
+  };
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -26,56 +31,55 @@ function Container() {
     const userData = {
       address: selectedUser.address,
       vehicleModel: selectedUser.vehicleModel,
-      emailId: selectedUser.emailId,
+      emailId: userList.emailId,
       password: selectedUser.password,
       userId: userList._id,
       desc: selectedUser.desc,
       price: selectedUser.price,
-      userName: selectedUser.userName,
-      date:selectedUser.date
+      userName: userList.userName,
+      date: date
     };
 
     axios.post('http://localhost:3001/User/booking', userData)
       .then((response) => {
         console.log('User saved successfully:', response.data);
-        setUserList((prevList) => [{...prevList}, response.data]); 
+        setUserList((prevList) => [{ ...prevList }, response.data]);
         setSelectedUser(response.data);
-        setShowPopup(false); 
+        setShowPopup(false);
       })
       .catch((error) => {
         console.error('Error saving user:', error);
       });
   };
-const handleDeleteUser = (userId) => {
-  axios.delete(`http://localhost:3001/User/DeleteOrder/${userId}`)
-    .then((response) => {
-      console.log('User deleted successfully:', response.data);
-      setUserList((prevList) => {
-        const updatedList = prevList.filter(user => user.userId !== userId);
-        setShowPopup(false);
-        return updatedList;
-      });
-    })
-    .catch((error) => {
-      console.error('Error deleting user:', error);
-    });
-};
 
+  const handleDeleteUser = (userId) => {
+    axios.delete(`http://localhost:3001/User/DeleteOrder/${userId}`)
+      .then((response) => {
+        console.log('User deleted successfully:', response.data);
+        setUserList((prevList) => {
+          const updatedList = prevList.filter(user => user.userId !== userId);
+          setShowPopup(false);
+          return updatedList;
+        });
+      })
+      .catch((error) => {
+        console.error('Error deleting user:', error);
+      });
+  };
 
   return (
-    <div>
-      <div className='flex flex-row gap-8 relative'>
+    <div className="container mx-auto p-4">
+      <div className="flex flex-wrap gap-8 justify-center">
         {data1.map((item) => (
           <div
             key={item.id}
             onClick={() => handleClick(item)}
-            className="h-[185px] md:w-299 md:min-w-[250px] backdrop-blur-xl mt-96 lg:mt-[2rem] mb-4 lg:mb-12 border-none rounded-lg p-4 cursor-pointer flex flex-col items-center justify-between bg-blue-400"
+            className="h-[185px] w-full sm:w-[300px] backdrop-blur-xl mt-8 mb-4 border-none rounded-lg p-4 cursor-pointer flex flex-col items-center justify-between bg-blue-400"
           >
             <div className="w-full flex flex-col gap-2 items-end justify-end">
               <p className="text-white font-semibold text-base md:text-lg">
                 {item.desc}
               </p>
-              <p className="mt-1 text-black text-sm"></p>
               <div className="flex items-center gap-8">
                 <p className="text-lg text-white font-semibold">
                   <span className="text-sm text-white">${item.price}</span>
@@ -88,8 +92,8 @@ const handleDeleteUser = (userId) => {
 
       {showPopup && selectedUser && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-            <button 
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
+            <button
               className="absolute top-2 right-2 text-gray-700 text-xl font-bold"
               onClick={handleClosePopup}
             >
@@ -108,13 +112,13 @@ const handleDeleteUser = (userId) => {
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
               />
             </label>
-  
+
             <label className="block mb-2">
               <span className="text-gray-700">Vehicle Model:</span>
               <input
-                type="text" 
-                name="vehicleModel" 
-                value={selectedUser.vehicleModel} 
+                type="text"
+                name="vehicleModel"
+                value={selectedUser.vehicleModel}
                 onChange={handleInputChange}
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
               />
@@ -123,23 +127,23 @@ const handleDeleteUser = (userId) => {
             <label className="block mb-2">
               <span className="text-gray-700">Date:</span>
               <input
-                type="Date" 
-                name="Date" 
-                value={selectedUser.date} 
-                onChange={handleInputChange}
+                type="date"
+                name="date"
+                value={date} 
+                onChange={handleDateChange} 
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
               />
-            </label>
+            </label>
 
             <div className="flex justify-between mt-4">
               <button
-                onClick={handleSaveUser} 
+                onClick={handleSaveUser}
                 className="bg-green-500 text-white px-4 py-2 rounded"
               >
                 Save
               </button>
               <button
-                onClick={() => handleDeleteUser(selectedUser.userId)} // Pass the userId
+                onClick={() => handleDeleteUser(selectedUser.userId)}
                 className="bg-red-500 text-white px-4 py-2 rounded"
               >
                 Delete
