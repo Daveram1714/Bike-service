@@ -190,35 +190,6 @@ app.post("/User/signUp", function(req, res) {
 
 
 
-// app.post("/completed", async (req, res) => {
-//   const { emailId } = req.body;  // Assume the userId is sent in the request body
-
-//   try {
-//     const user = await User.findOne({ emailId }); 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-
-//     const dynamicEmail = user.emailId;  
-
-//     const info = await Completed.sendMail({
-//       from: {
-//         name: 'daveram',
-//         address: "daveram2273@gmail.com",
-//       },
-//       to: dynamicEmail,  
-//       subject: "Order Status",
-//       text: "Your order is ready for delivery...",
-//       html: "<b>Your order is ready for delivery</b>",
-//     });
-
-//     console.log("Message sent: %s", info.messageId);
-//     res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
-//   } catch (error) {
-//     console.error("Error sending email:", error);
-//     res.status(500).json({ error: 'Failed to send email' });
-//   }
-// });
 
 
 app.post("/completed", async (req, res) => {
@@ -245,7 +216,47 @@ app.post("/completed", async (req, res) => {
       text: "Your order is ready for delivery...",
       html: "<b>Your order is ready for delivery</b>",
     });
+      
+    console.log(dynamicEmail);
+    
+    console.log("Message sent: %s", info.messageId);
+    res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
+});
 
+
+
+
+app.post("/Pending", async (req, res) => {
+  const { userId } = req.body;  // Assume the userId is sent in the request body
+
+  try {
+    // Fetch the user or order based on the userId
+    const user = await User.findOne({ userId });  // You can also use Order model if needed
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const dynamicEmail = user.emailId;  // Extract emailId from the User model
+
+    // Send email using nodemailer
+    const info = await Completed.sendMail({
+      from: {
+        name: 'daveram',
+        address: "daveram2273@gmail.com",
+      },
+      to: dynamicEmail,  // Replace static email with the dynamic one
+      subject: "Order Status",
+      text: "Your order is ready for delivery...",
+      html: "<b>Your order is ready for delivery</b>",
+    });
+      
+    console.log(dynamicEmail);
+    
     console.log("Message sent: %s", info.messageId);
     res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
   } catch (error) {

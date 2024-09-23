@@ -32,6 +32,7 @@ function Container() {
       desc: selectedUser.desc,
       price: selectedUser.price,
       userName: userList.userName,
+      date :userList.date
     };
 
     axios.post('http://localhost:3001/User/booking', userData)
@@ -74,7 +75,7 @@ const handleDeleteUser = (userId) => {
               <p className="text-white font-semibold text-base md:text-lg">
                 {item.desc}
               </p>
-              <p className="mt-1 text-black text-sm">Calories</p>
+              <p className="mt-1 text-black text-sm"></p>
               <div className="flex items-center gap-8">
                 <p className="text-lg text-white font-semibold">
                   <span className="text-sm text-white">${item.price}</span>

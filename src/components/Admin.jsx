@@ -31,8 +31,14 @@ function AdminDashboard() {
     setBookings(updatedBookings);
 
     if (updatedStatus === 'Completed') {
-      const email = userList.find(user => user.userName === bookings[index].userName)?.emailId; 
-      await sendCompletionNotification(email);
+      const email = bookings[index].emailId; 
+      await sendCompletionNotification(email); 
+ 
+     }
+
+    if(updatedStatus === 'Pending'){
+      const email = bookings[index].emailId;
+      await  sendPendingMail(email);
     }
   };
 
@@ -61,6 +67,24 @@ function AdminDashboard() {
     }
   };
   
+  const sendPendingMail = async (email) => {
+    console.log('Sending email to:', email); 
+    try {
+      const response = await axios.post('http://localhost:3001/Pending', {
+        email: email,
+        message: 'Your order has been Pending!'
+      });
+  
+      if (response.status === 200) {
+        console.log('Email notification sent successfully');
+      } else {
+        console.error('Failed to send email notification');
+      }
+    } catch (error) {
+      console.error('Error sending email notification:', error.response.data);
+    }
+  };
+
   return (
     <div>
       <div className='-mt-8 absolute'>
@@ -95,6 +119,7 @@ function AdminDashboard() {
                       <td className="border px-4 py-2">{booking.price}</td>
                       <td className="border px-4 py-2">{booking.address}</td>
                       <td className="border px-4 py-2">{booking.vehicleModel}</td>
+                      <td className="border px-4 py-2">{booking.date}</td>
                       <td className="border px-4 py-2">
                         {isAdmin ? (
                           <select
