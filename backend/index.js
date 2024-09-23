@@ -34,7 +34,8 @@ const Order=mongoose.model("Order",{
   emailId:String,
   password:String,
   vehicleModel:String,
-  address:String
+  address:String,
+  date:String
 },"order")
 
 // app.post("/login",function(req,res){
@@ -139,7 +140,7 @@ app.get("/User/booking/allUser", async function(req, res) {
 
 
 app.post("/User/booking",function(req,res){
-  const {desc,price,password,userId,emailId,address,userName,vehicleModel}=req.body
+  const {desc,price,password,userId,emailId,address,userName,vehicleModel,date}=req.body
 
   const newOrder=new Order({
     desc:desc,
@@ -149,7 +150,8 @@ app.post("/User/booking",function(req,res){
     emailId:emailId,
     address:address,
     userName:userName,
-    vehicleModel:vehicleModel
+    vehicleModel:vehicleModel,
+    date:date
   })
 
   newOrder.save()
@@ -231,25 +233,23 @@ app.post("/completed", async (req, res) => {
 
 
 app.post("/Pending", async (req, res) => {
-  const { userId } = req.body;  // Assume the userId is sent in the request body
+  const { userId } = req.body;  
 
   try {
-    // Fetch the user or order based on the userId
-    const user = await User.findOne({ userId });  // You can also use Order model if needed
+    const user = await User.findOne({ userId });  
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const dynamicEmail = user.emailId;  // Extract emailId from the User model
+    const dynamicEmail = user.emailId;  
 
-    // Send email using nodemailer
     const info = await Completed.sendMail({
       from: {
         name: 'daveram',
         address: "daveram2273@gmail.com",
       },
-      to: dynamicEmail,  // Replace static email with the dynamic one
+      to: dynamicEmail,   
       subject: "Order Status",
       text: "Your order is ready for delivery...",
       html: "<b>Your order is ready for delivery</b>",

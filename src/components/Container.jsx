@@ -26,13 +26,13 @@ function Container() {
     const userData = {
       address: selectedUser.address,
       vehicleModel: selectedUser.vehicleModel,
-      emailId: userList.emailId,
+      emailId: selectedUser.emailId,
       password: selectedUser.password,
       userId: userList._id,
       desc: selectedUser.desc,
       price: selectedUser.price,
-      userName: userList.userName,
-      date :userList.date
+      userName: selectedUser.userName,
+      date:selectedUser.date
     };
 
     axios.post('http://localhost:3001/User/booking', userData)
@@ -115,6 +115,17 @@ const handleDeleteUser = (userId) => {
                 type="text" 
                 name="vehicleModel" 
                 value={selectedUser.vehicleModel} 
+                onChange={handleInputChange}
+                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+              />
+            </label>
+
+            <label className="block mb-2">
+              <span className="text-gray-700">Date:</span>
+              <input
+                type="Date" 
+                name="Date" 
+                value={selectedUser.date} 
                 onChange={handleInputChange}
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
               />

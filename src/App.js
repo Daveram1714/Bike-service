@@ -24,10 +24,10 @@ function App()
 ]); 
   
 const [selectedUser,setSelectedUser]=useState([ 
-  {id:1,desc:"WaterWash", price:"₹100", address:"", vehicleModel:""},
-  {id:2, desc: 'Oil Change', price: '₹80', address:"",vehicleModel:"" },
-  {id:3, desc: 'Engine Work',price: '₹60', address:"",vehicleModel:""},
-  {id:4, desc: 'General Service', price: '₹120', address:"",vehicleModel:""},
+  {id:1,desc:"WaterWash", price:"₹100", address:"", vehicleModel:"",date:""},
+  {id:2, desc: 'Oil Change', price: '₹80', address:"",vehicleModel:"" ,date:""},
+  {id:3, desc: 'Engine Work',price: '₹60', address:"",vehicleModel:"",date:""},
+  {id:4, desc: 'General Service', price: '₹120', address:"",vehicleModel:"",date:""},
   ])
 
   useEffect(()=>{

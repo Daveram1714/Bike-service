@@ -106,6 +106,7 @@ function AdminDashboard() {
                   <th className="px-4 py-2">Price</th>
                   <th className="px-4 py-2">Address</th>
                   <th className="px-4 py-2">Vehicle Model</th>
+                  <th className="px-4 py-2">Booking Date</th>
                   <th className="px-4 py-2">Status</th>
                 </tr>
               </thead>
