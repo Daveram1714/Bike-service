@@ -1,30 +1,13 @@
-const nodemailer = require("nodemailer");
+// completed.js
+import nodemailer from 'nodemailer';
 
-
-const transporter = nodemailer.createTransport({
+export const Completed = nodemailer.createTransport({
   service: 'gmail',
   host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
     user: "daveram2273@gmail.com",
-    pass: "asjy hidd iydf ofbr",
+    pass: "xysx llmc grdn iwik",
   },
 });
-
-async function main() {
-  const info = await transporter.sendMail({
-    from: {
-        name :'daveram',
-        address: "daveram2273@gmail.com",
-    },
-    to: "daveram860@gmail.com",
-    subject: "Status", 
-    text: "Ready to Delevery ....", 
-    html: "<b>Completed ....</b>", 
-  });
-
-  console.log("Message sent: %s", info.messageId);
-}
-
-main().catch(console.error);

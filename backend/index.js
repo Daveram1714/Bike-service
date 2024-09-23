@@ -1,10 +1,9 @@
-const express=require("express")
-const mongoose=require("mongoose")
-const bodyParser = require('body-parser');
-const nodemailer=require("nodemailer")
-
+import { Completed  } from "./completed.js";
+import express from 'express'
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 const app=express()
-const cors=require("cors")
 
 app.use(cors())
 
@@ -188,76 +187,73 @@ app.post("/User/signUp", function(req, res) {
 
   //Mail Functionality
 
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "daveram2273@gmail.com",
-      pass: "asjy hidd iydf ofbr",
-    },
-  });
-  
-  
-  // async function sendPendingMessage(email) {
-  //   const info = await transporter.sendMail({
-  //     from: {
-  //       name: 'daveram',
-  //       address: "daveram2273@gmail.com",
-  //     },
-  //     to: {email},
-  //     subject: "Status",
-  //     text: "Pending ....",
-  //     html: "<b>Pending</b>",
-  //   });
-  
-  //   console.log("Message sent: %s", info.messageId);
-  // }
 
 
-  
-  
-  async function sendCompletedMessage(email) {
-    const info = await transporter.sendMail({
+
+// app.post("/completed", async (req, res) => {
+//   const { emailId } = req.body;  // Assume the userId is sent in the request body
+
+//   try {
+//     const user = await User.findOne({ emailId }); 
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     const dynamicEmail = user.emailId;  
+
+//     const info = await Completed.sendMail({
+//       from: {
+//         name: 'daveram',
+//         address: "daveram2273@gmail.com",
+//       },
+//       to: dynamicEmail,  
+//       subject: "Order Status",
+//       text: "Your order is ready for delivery...",
+//       html: "<b>Your order is ready for delivery</b>",
+//     });
+
+//     console.log("Message sent: %s", info.messageId);
+//     res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//     res.status(500).json({ error: 'Failed to send email' });
+//   }
+// });
+
+
+app.post("/completed", async (req, res) => {
+  const { userId } = req.body;  // Assume the userId is sent in the request body
+
+  try {
+    // Fetch the user or order based on the userId
+    const user = await User.findOne({ userId });  // You can also use Order model if needed
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const dynamicEmail = user.emailId;  // Extract emailId from the User model
+
+    // Send email using nodemailer
+    const info = await Completed.sendMail({
       from: {
         name: 'daveram',
         address: "daveram2273@gmail.com",
       },
-      to :{email},
-      subject: "Status",
-      text: "Ready to Delevery ....",
-      html: "<b>Ready to Delevery</b>",
+      to: dynamicEmail,  // Replace static email with the dynamic one
+      subject: "Order Status",
+      text: "Your order is ready for delivery...",
+      html: "<b>Your order is ready for delivery</b>",
     });
-  
-    console.log("Message sent: %s", info.messageId);
-  }
-  
-  app.post('/pending', (req, res) => {
-    const { email } = req.body;
-    sendPendingMessage(email);
-    res.send('Pending message sent');
-  });
-  
-  app.post('/completed', async (req, res) => {
-    const { email, message } = req.body;
-  
-    console.log('Received email:', email); 
-    console.log('Received message:', message); 
-  
-    if (!email || !message) {
-      return res.status(400).send('Email and message are required'); 
-    }
-  
-    try {
 
-    } catch (error) {
-      console.error('Error sending email:', error);
-      res.status(500).send('Error sending email');
-    }
-  });
-  
-  
+    console.log("Message sent: %s", info.messageId);
+    res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
+});
+
 
 app.listen(3001,function(){
     console.log("server is running on port 3001")
