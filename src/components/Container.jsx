@@ -15,16 +15,16 @@ function Container() {
     setIsEditing(true);
   };
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value); 
-  };
-
   const handleClosePopup = () => {
     setShowPopup(false);
   };
 
   const handleInputChange = (e) => {
     setSelectedUser({ ...selectedUser, [e.target.name]: e.target.value });
+  };
+
+  const handleDateChange = (e) => {
+    setDate(e.target.value); 
   };
 
   const handleSaveUser = () => {
@@ -37,7 +37,7 @@ function Container() {
       desc: selectedUser.desc,
       price: selectedUser.price,
       userName: userList.userName,
-      date: date
+      date: date, 
     };
 
     axios.post('http://localhost:3001/User/booking', userData)
@@ -53,7 +53,7 @@ function Container() {
   };
 
   const handleDeleteUser = (userId) => {
-    axios.delete(`http://localhost:3001/User/DeleteOrder/${userId}`)
+    axios.delete('http://localhost:3001/User/DeleteOrder/${userId}')
       .then((response) => {
         console.log('User deleted successfully:', response.data);
         setUserList((prevList) => {
@@ -68,18 +68,19 @@ function Container() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex flex-wrap gap-8 justify-center">
+    <div>
+      <div className='flex flex-row gap-8 relative'>
         {data1.map((item) => (
           <div
             key={item.id}
             onClick={() => handleClick(item)}
-            className="h-[185px] w-full sm:w-[300px] backdrop-blur-xl mt-8 mb-4 border-none rounded-lg p-4 cursor-pointer flex flex-col items-center justify-between bg-blue-400"
+            className="h-[185px] md:w-299 md:min-w-[250px] backdrop-blur-xl mt-96 lg:mt-[2rem] mb-4 lg:mb-12 border-none rounded-lg p-4 cursor-pointer flex flex-col items-center justify-between bg-blue-400"
           >
             <div className="w-full flex flex-col gap-2 items-end justify-end">
               <p className="text-white font-semibold text-base md:text-lg">
                 {item.desc}
               </p>
+              <p className="mt-1 text-black text-sm">Calories</p>
               <div className="flex items-center gap-8">
                 <p className="text-lg text-white font-semibold">
                   <span className="text-sm text-white">${item.price}</span>
@@ -92,7 +93,7 @@ function Container() {
 
       {showPopup && selectedUser && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
             <button
               className="absolute top-2 right-2 text-gray-700 text-xl font-bold"
               onClick={handleClosePopup}
@@ -124,6 +125,7 @@ function Container() {
               />
             </label>
 
+           
             <label className="block mb-2">
               <span className="text-gray-700">Date:</span>
               <input
@@ -133,7 +135,7 @@ function Container() {
                 onChange={handleDateChange} 
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
               />
-            </label>
+            </label>
 
             <div className="flex justify-between mt-4">
               <button
@@ -156,4 +158,4 @@ function Container() {
   );
 }
 
-export default Container;
+export default Container;

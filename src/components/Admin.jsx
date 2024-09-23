@@ -49,11 +49,11 @@ function AdminDashboard() {
     return '';
   };
 
-  const sendCompletionNotification = async (email) => {
-    console.log('Sending email to:', email); 
+  const sendCompletionNotification = async (emailId) => {
+    console.log('Sending email to:', emailId); 
     try {
       const response = await axios.post('http://localhost:3001/completed', {
-        email: email,
+        emailId: emailId,
         message: 'Your order has been completed!'
       });
   
@@ -67,11 +67,11 @@ function AdminDashboard() {
     }
   };
   
-  const sendPendingMail = async (email) => {
-    console.log('Sending email to:', email); 
+  const sendPendingMail = async (emailId) => {
+    console.log('Sending email to:', emailId); 
     try {
       const response = await axios.post('http://localhost:3001/Pending', {
-        email: email,
+        emailId: emailId,
         message: 'Your order has been Pending!'
       });
   
