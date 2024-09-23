@@ -71,9 +71,9 @@ const Contact = () => {
 
       {/* Footer Section */}
       <section className="bg-green-100 p-10 flex flex-col gap-5 mt-5">
-        <h1 className="text-4xl font-bold">Greenden</h1>
-        <p>The Standard chunk of Lorem ipsum used since the 1500s is reproduced below for those interested.</p>
-        <p>@ 2021 Greenday.com</p>
+        <h1 className="text-4xl font-bold">Moto shop  </h1>
+        <p>The standard service package for our bikes, trusted since the 2004s, is detailed below for those interested..</p>
+        <p>@ 2021 Motoshop.com</p>
       </section>
     </div>
   );

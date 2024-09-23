@@ -26,7 +26,7 @@ function Footer()
 
         </div>
     </section>
-    <p className="ml-36 mt-5 text-xl font-semibold">The Standard chunk of Lorem ipsum used since the 1500s is reprodused below for those interest</p>
+    <p className="ml-36 mt-5 text-xl font-semibold">The standard service package for our bikes, trusted since the 2004, is detailed below for those interested.</p>
     <p className="mt-12 ml-72 text-xl font-normal">copyright &copy; 2021 All rights reserved | Made with ❤ by Lx</p>
     </div>
     )
