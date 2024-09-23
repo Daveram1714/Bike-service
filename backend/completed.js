@@ -21,7 +21,7 @@ async function main() {
     to: "daveram860@gmail.com",
     subject: "Status", 
     text: "Ready to Delevery ....", 
-    html: "<b>Pending</b>", 
+    html: "<b>Completed ....</b>", 
   });
 
   console.log("Message sent: %s", info.messageId);
