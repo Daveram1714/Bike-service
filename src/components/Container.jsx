@@ -68,22 +68,29 @@ function Container() {
   };
 
   return (
-    <div>
-      <div className='flex flex-row gap-8 relative'>
+    <div className='bg-white'>
+      <div className='flex flex-row gap-28 relative p-1'>
         {data1.map((item) => (
           <div
             key={item.id}
             onClick={() => handleClick(item)}
-            className="h-[185px] md:w-299 md:min-w-[250px] backdrop-blur-xl mt-96 lg:mt-[2rem] mb-4 lg:mb-12 border-none rounded-lg p-4 cursor-pointer flex flex-col items-center justify-between bg-blue-400"
+            className="h-[205px] md:w-299 md:min-w-[270px] backdrop-blur-xl mt-96 lg:mt-[2rem]  lg:mb-12 border-none rounded-lg p-4 cursor-pointer flex flex-col items-center justify-between bg-blue-400"
           >
+            
+        <img
+          src={item.imageSrc}
+          alt={item.desc}
+          className="w-full h-[120px] object-cover rounded-lg mb-4"
+        />
+
             <div className="w-full flex flex-col gap-2 items-end justify-end">
               <p className="text-white font-semibold text-base md:text-lg">
                 {item.desc}
               </p>
-              <p className="mt-1 text-black text-sm">Calories</p>
-              <div className="flex items-center gap-8">
+              <p className="-mt-5 text-black text-sm"></p>
+              <div className="flex items-center gap-10">
                 <p className="text-lg text-white font-semibold">
-                  <span className="text-sm text-white">${item.price}</span>
+                  <span className="text-sm text-white">₹{item.price}</span>
                 </p>
               </div>
             </div>

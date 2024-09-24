@@ -181,12 +181,11 @@ app.post("/User/signUp", function(req, res) {
       });
   });
 
+
+
+
+
   //Mail Functionality
-
-
-
-
-
 
   app.post("/completed", async (req, res) => {
     const { emailId, subject, message } = req.body;
@@ -229,38 +228,6 @@ app.post("/User/signUp", function(req, res) {
 
 
 
-// app.post("/Pending", async (req, res) => {
-//   const { userId } = req.body;  
-
-//   try {
-//     const user = await Order.findOne({ emailId }).select('emailId');
-
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-
-//     const dynamicEmail = user.emailId;  
-
-//     const info = await Completed.sendMail({
-//       from: {
-//         name: 'daveram',
-//         address: "daveram2273@gmail.com",
-//       },
-//       to: dynamicEmail,   
-//       subject: "Order Status",
-//       text: "Your order is ready for delivery...",
-//       html: "<b>Your order is ready for delivery</b>",
-//     });
-      
-//     console.log(dynamicEmail);
-    
-//     console.log("Message sent: %s", info.messageId);
-//     res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
-//   } catch (error) {
-//     console.error("Error sending email:", error);
-//     res.status(500).json({ error: 'Failed to send email' });
-//   }
-// });
 
 app.post("/Pending", async (req, res) => {
   const { emailId, subject, message } = req.body;

@@ -20,17 +20,17 @@ function Header()
   
     return(<div className="">
       
-      <div className="text-black">
+      <div className="text-black relative">
       <Navbar/>
      
       </div>
-      <div className="absolute ml-2 mt-16">
-        <h1 className="mt-36 text-2xl font-semibold relative">Hello,</h1>
+      <div className="absolute ml-10 mt-20 bg-white">
+        <h1 className="mt-40 text-3xl font-semibold relative ">Hello,</h1>
         <div>
-        <p className="ml-16 -mt-8 text-2xl font-bold text-blue-800 kanit-semibold">&nbsp;Motoshop</p>
+        <p className="ml-20 -mt-8 text-3xl font-bold text-blue-800 kanit-semibold">&nbsp;Motoshop</p>
 
         </div>
-        <p className="suse-paragraph font-semibold text-lg font-sans mt-1">
+        <p className="suse-paragraph font-semibold text-xl font-sans mt-1 bg-white">
   Riding a motorcycle isn't just about the freedom 
   <br />of the open road—it's  a chance to escape the everyday and 
   <br />connect with the world around you.
@@ -39,7 +39,7 @@ function Header()
 
       </div>
 
-      <div>
+      <div className="bg-white">
         <Body/>
       </div>
       <div className="top-2/3 -mt-14 m-6 p-1  absolute">

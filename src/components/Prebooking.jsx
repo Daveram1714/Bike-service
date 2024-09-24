@@ -39,14 +39,16 @@ function Prebooking() {
   };
 
   return (
-    <div className="absolute ml-96 ">
-      <div className="ml-96 -mt-80">
+    <div className="absolute ml-96 mb-96">
+      <div className="ml-96 -mt-96">
+        <div className="ml-96 -mt-72">
         <button
-          className="bg-green-500 text-black px-3 py-1 rounded ml-80"
+          className="bg-green-500 text-black px-3 py-1 rounded ml-56 "
           
         >
           <img src={'/R.svg'} alt="" className="w-4" onClick={handleClick}/>
         </button>
+      </div>
       </div>
 
       

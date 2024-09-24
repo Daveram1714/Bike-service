@@ -16,14 +16,17 @@ function Body() {
 
   return (
     <div>
-      <div className="flex justify-center ml-80">
+      <div className="flex justify-center ml-96">
         <img
           src={bike[currentImageIndex].imageSrc} 
           alt={`Bike ${currentImageIndex + 1}`}
-          className="w-656 transition-all duration-1000 ease-in-out mt-10"
+          className="w-880 transition-all duration-1000 ease-in-out mt-1 ml-48"
         />
       </div>
+      <div>
       <Prebooking/>
+      </div>
+      
 
     </div>
   );
