@@ -30,3 +30,10 @@ Use  `npm run server ` --> to execute the Backend
 Backend Uses http://localhost:3001  as a port number 
 
 
+### `E-mail functionality `
+
+Navigate adminpage and choose Pending (Dop-down ) to Sent pending E-mail to the Specific User.
+Navigate adminpage and choose Comppletedn (Dop-down ) to Sent Completed E-mail to the Specific User.
+
+
+
