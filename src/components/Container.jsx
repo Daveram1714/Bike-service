@@ -151,12 +151,7 @@ function Container() {
               >
                 Save
               </button>
-              <button
-                onClick={() => handleDeleteUser(selectedUser.userId)}
-                className="bg-red-500 text-white px-4 py-2 rounded"
-              >
-                Delete
-              </button>
+            
             </div>
           </div>
         </div>
