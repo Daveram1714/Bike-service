@@ -207,8 +207,8 @@ app.post("/User/signUp", function(req, res) {
   
       const info = await Completed.sendMail({
         from: {
-          name: 'daveram',
-          address: "daveram2273@gmail.com",
+          name: 'Enter The Sender Name',
+          address: "Enter the Senders E-mail here ",
         },
         to: dynamicEmail, 
         subject: subject || "Order Status", 
@@ -249,8 +249,8 @@ app.post("/Pending", async (req, res) => {
 
     const info = await Completed.sendMail({
       from: {
-        name: 'daveram',
-        address: "daveram2273@gmail.com",
+        name: 'Enter the Sender Name ',
+        address: "Enter The Senders E-mail",
       },
       to: dynamicEmail, 
       subject: subject || "Order Status", 
